@@ -22,41 +22,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        String[] colors = {"Red", "Blue", "Green", "Magenta", "Purple", "Black"};
+        String[] colors = {"Red", "Blue", "Green", "Magenta", "Purple", "Black", "Yellow", "White", "Cyan", "Grey"};
 
         Spinner spinner = findViewById(R.id.spinner);
         ColorAdapter adapter = new ColorAdapter(this,colors);
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView textView = (TextView) view;
-                findViewById(R.id.backgroundID).setBackgroundColor(Color.parseColor(textView.getText().toString()));
 
+                findViewById(R.id.backgroundID).setBackgroundColor(Color.parseColor(textView.getText().toString()));
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
 
     public class ColorAdapter extends BaseAdapter
     {
@@ -64,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         String[] colors;
 
-        //public constructor
         public ColorAdapter(Context context, String[] colors) {
             this.context = context;
             this.colors = colors;
@@ -93,19 +76,27 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 textView = new TextView(context);
             }
-            textView.setTextSize(12);
+            textView.setTextSize(23);
+            textView.setTextColor(Color.BLACK);
+            textView.setText(colors[position]);
+            textView.setBackgroundColor(Color.WHITE);
+            return textView;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            TextView textView;
+
+            if (convertView instanceof View){
+                textView = (TextView) convertView;
+            } else {
+                textView = new TextView(context);
+            }
+            textView.setTextSize(23);
             textView.setTextColor(Color.BLACK);
             textView.setText(colors[position]);
             textView.setBackgroundColor(Color.parseColor(textView.getText().toString()));
             return textView;
         }
     }
-
-
-
-
-
-
-
-
 }
