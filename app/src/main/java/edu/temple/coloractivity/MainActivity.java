@@ -3,11 +3,13 @@ package edu.temple.coloractivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -41,22 +43,23 @@ public class MainActivity extends AppCompatActivity {
 
     public class ColorAdapter extends BaseAdapter
     {
-        private Context context; //context
-        private List<String> items; //data source of the list adapter
+        Context context;
+
+        String[] colors;
 
         //public constructor
-        public ColorAdapter(Context context, List<String> items) {
+        public ColorAdapter(Context context, String[] colors) {
             this.context = context;
-            this.items = items;
+            this.colors = colors;
         }
         @Override
         public int getCount() {
-            return items.size();
+            return colors.length;
         }
 
         @Override
         public Object getItem(int position) {
-            return items.get(position);
+            return colors[position];
         }
 
         @Override
@@ -66,7 +69,18 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            return null;
+            TextView textView;
+
+            if (convertView instanceof View){
+                textView = (TextView) convertView;
+            } else {
+                textView = new TextView(context);
+            }
+            textView.setTextSize(12);
+            textView.setTextColor(Color.BLACK);
+            textView.setText(colors[position]);
+            textView.setBackgroundColor(Color.WHITE);
+            return textView;
         }
     }
 
