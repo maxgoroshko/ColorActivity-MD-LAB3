@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,7 +22,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        String[] colors = {"Red", "Blue", "Green", "Magenta", "Purple", "Black"};
 
+        Spinner spinner = findViewById(R.id.spinner);
+        ColorAdapter adapter = new ColorAdapter(this,colors);
+        spinner.setAdapter(adapter);
 
 
 
