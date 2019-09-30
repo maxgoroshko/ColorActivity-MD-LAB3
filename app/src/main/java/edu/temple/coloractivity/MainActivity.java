@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Spinner;
@@ -28,8 +29,19 @@ public class MainActivity extends AppCompatActivity {
         ColorAdapter adapter = new ColorAdapter(this,colors);
         spinner.setAdapter(adapter);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView textView = (TextView) view;
+                findViewById(R.id.backgroundID).setBackgroundColor(Color.parseColor(textView.getText().toString()));
 
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 
@@ -84,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             textView.setTextSize(12);
             textView.setTextColor(Color.BLACK);
             textView.setText(colors[position]);
-            textView.setBackgroundColor(Color.WHITE);
+            textView.setBackgroundColor(Color.parseColor(textView.getText().toString()));
             return textView;
         }
     }
